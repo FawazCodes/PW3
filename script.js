@@ -85,40 +85,39 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     const audio = new Audio(`win-sound${audioIndex}.mp3`);
     audio.loop = true;
-    audio.play();
+    audio.addEventListener('loadedmetadata', () => {
+        audio.play();
+    });
 }
 
-    }
+function preloadResources() {
+    const imageUrls = ['background.gif', 'background2.gif'];
+    const audioUrls = [
+        'win-sound1.mp3',
+        'win-sound2.mp3',
+        'win-sound3.mp3',
+        'win-sound4.mp3',
+    ];
 
-    function preloadResources() {
-        const imageUrls = ['background.gif', 'background2.gif'];
-        const audioUrls = [
-            'win-sound.mp3',
-            'win-sound2.mp3',
-            'win-sound3.mp3',
-            'win-sound4.mp3',
-        ];
+    window.preloadedImages = [];
 
-        window.preloadedImages = [];
-
-                imageUrls.forEach((imageUrl) => {
-            const img = new Image();
-            img.src = imageUrl;
-            img.onload = () => {
-                preloadedImages.push(img);
-            };
-        });
-
-        audioUrls.forEach((audioUrl) => {
-            const audio = new Audio();
-            audio.src = audioUrl;
-            audio.load();
-        });
-
-        // Update the changeBackground function to use preloadedImages
-        window.changeBackground = function() {
-            const backgroundIndex = Math.floor(Math.random() * preloadedImages.length);
-            document.body.style.backgroundImage = `url('${preloadedImages[backgroundIndex].src}')`;
+    imageUrls.forEach((imageUrl) => {
+        const img = new Image();
+        img.src = imageUrl;
+        img.onload = () => {
+            preloadedImages.push(img);
         };
-    }
-});
+    });
+
+    audioUrls.forEach((audioUrl) => {
+        const audio = new Audio();
+        audio.src = audioUrl;
+        audio.load();
+    });
+
+    // Update the changeBackground function to use preloadedImages
+    window.changeBackground = function () {
+        const backgroundIndex = Math.floor(Math.random() * preloadedImages.length);
+        document.body.style.backgroundImage = `url('${preloadedImages[backgroundIndex].src}')`;
+    };
+}
