@@ -1,15 +1,16 @@
-document.getElementById('curiousCat').onclick = function () {
-    window.location.href = 'https://curiouscat.live/Idkwallah';
-};
+document.addEventListener('DOMContentLoaded', function () {
+    document.getElementById('curiousCat').onclick = function () {
+        window.location.href = 'https://curiouscat.live/Idkwallah';
+    };
 
-const rockBtn = document.getElementById('rock');
-const paperBtn = document.getElementById('paper');
-const scissorsBtn = document.getElementById('scissors');
-const resultDiv = document.getElementById('result');
+    const rockBtn = document.getElementById('rock');
+    const paperBtn = document.getElementById('paper');
+    const scissorsBtn = document.getElementById('scissors');
+    const resultDiv = document.getElementById('result');
 
-rockBtn.addEventListener('click', () => playGame('rock'));
-paperBtn.addEventListener('click', () => playGame('paper'));
-scissorsBtn.addEventListener('click', () => playGame('scissors'));
+    rockBtn.addEventListener('click', () => playGame('rock'));
+    paperBtn.addEventListener('click', () => playGame('paper'));
+    scissorsBtn.addEventListener('click', () => playGame('scissors'));
 
 function playGame(player Choice) {
 const computerChoice = Math.floor(Math.random() * 3);
