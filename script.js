@@ -1,81 +1,67 @@
-document.addEventListener('DOMContentLoaded', function () {
-    document.getElementById('curiousCat').onclick = function () {
-        window.location.href = 'https://curiouscat.live/Idkwallah';
-    };
+document.addEventListener("DOMContentLoaded", function() {
+  document.getElementById("curiousCat").onclick = function() {
+    window.location.href = "https://curiouscat.live/Idkwallah";
+  };
 
-    const rockBtn = document.getElementById('rock');
-    const paperBtn = document.getElementById('paper');
-    const scissorsBtn = document.getElementById('scissors');
-    const resultDiv = document.getElementById('result');
+  const rockButton = document.getElementById("rock");
+  const paperButton = document.getElementById("paper");
+  const scissorsButton = document.getElementById("scissors");
+  const resultDisplay = document.getElementById("result");
 
-    rockBtn.addEventListener('click', () => playGame('rock'));
-    paperBtn.addEventListener('click', () => playGame('paper'));
-    scissorsBtn.addEventListener('click', () => playGame('scissors'));
+  function playGame(userChoice) {
+    const computerChoice = (function() {
+      const choices = ["rock", "paper", "scissors"];
+      const randomIndex = Math.floor(Math.random() * choices.length);
+      return choices[randomIndex];
+    })();
 
-    function playGame(playerMove) {
-        const computerMove = generateComputerMove();
-        const gameResult = getGameResult(playerMove, computerMove);
-        displayResult(gameResult, computerMove);
-    }
+    const result = (function(user, computer) {
+      if (user === computer) {
+        return "tie";
+      }
+      if ((user === "rock" && computer === "scissors") ||
+          (user === "paper" && computer === "rock") ||
+          (user === "scissors" && computer === "paper")) {
+        return "win";
+      }
+      return "lose";
+    })(userChoice, computerChoice);
 
-    function generateComputerMove() {
-        const moves = ['rock', 'paper', 'scissors'];
-        const randomIndex = Math.floor(Math.random() * moves.length);
-        return moves[randomIndex];
-    }
+    (function(result, computerChoice) {
+      let message, emoji, color;
 
-    function getGameResult(playerMove, computerMove) {
-        if (playerMove === computerMove) return 'tie';
-        if (
-            (playerMove === 'rock' && computerMove === 'scissors') ||
-            (playerMove === 'paper' && computerMove === 'rock') ||
-            (playerMove === 'scissors' && computerMove === 'paper')
-        ) {
-            return 'win';
-        } else {
-            return 'lose';
-        }
-    }
+      if (result === "win") {
+        message = "You Won!!!";
+        emoji = "🥳";
+        color = "green";
+        const randomBackgroundIndex = Math.floor(Math.random() * 2) + 1;
+        document.body.style.backgroundImage = `url('background${randomBackgroundIndex}.gif')`;
+        const winAudio = new Audio();
+        winAudio.preload = "auto";
+        winAudio.src = `win-sound${Math.floor(Math.random() * 4) + 1}.mp3`;
+        winAudio.play();
+      } else if (result === "tie") {
+        message = "It's a Tie";
+        emoji = "😐";
+        color = "white";
+      } else {
+        message = "You Lost...";
+        emoji = "😢";
+        color = "red";
+      }
 
-    function displayResult(gameResult, computerMove) {
-        let resultText;
-        let emoji;
-        let resultColor;
+      resultDisplay.innerHTML = `${message} ${emoji}<br>Computer chose ${computerChoice} ${computerChoice === "rock" ? "🪨" : computerChoice === "paper" ? "📄" : "✂️"}`;
+      resultDisplay.style.color = color;
+    })(result, computerChoice);
+  }
 
-        if (gameResult === 'win') {
-            resultText = 'You Won!!!';
-            emoji = '🥳';
-            resultColor = 'green';
-            changeBackground();
-            playRandomWinSound();
-        } else if (gameResult === 'tie') {
-            resultText = 'It\'s a Tie';
-            emoji = '😐';
-            resultColor = 'white';
-        } else {
-            resultText = 'You Lost...';
-            emoji = '😢';
-            resultColor = 'red';
-        }
-
-        resultDiv.innerHTML = `${resultText} ${emoji}<br>Computer chose ${computerMove} ${getEmoji(computerMove)}`;
-        resultDiv.style.color = resultColor;
-    }
-
-    function getEmoji(move) {
-        if (move === 'rock') return '🪨';
-        if (move === 'paper') return '📄';
-        return '✂️';
-    }
-
-    function changeBackground() {
-        const backgroundIndex = Math.floor(Math.random() * 2) + 1;
-        document.body.style.backgroundImage = `url('background${backgroundIndex}.gif')`;
-    }
-
-    function playRandomWinSound() {
-        const audioIndex = Math.floor(Math.random() * 4) + 1;
-        const audio = new Audio(`win-sound${audioIndex}.mp3`);
-        audio.play();
-    }
+  rockButton.addEventListener("click", function() {
+    playGame("rock");
+  });
+  paperButton.addEventListener("click", function() {
+    playGame("paper");
+  });
+  scissorsButton.addEventListener("click", function() {
+    playGame("scissors");
+  });
 });
