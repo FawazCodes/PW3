@@ -75,11 +75,19 @@ document.addEventListener('DOMContentLoaded', function () {
         document.body.style.backgroundImage = `url('${preloadedImages[backgroundIndex].src}')`;
     }
 
-    function playRandomWinSound() {
-        const audioIndex = Math.floor(Math.random() * 4) + 1;
-        const audio = new Audio(`win-sound${audioIndex}.mp3`);
-        audio.loop = true;
-        audio.play();
+   function playRandomWinSound() {
+    let audioIndex;
+    const randNum = Math.random();
+    if (randNum < 0.4) {
+        audioIndex = 1; // 40% chance of playing win-sound1.mp3
+    } else {
+        audioIndex = Math.floor(Math.random() * 3) + 2; // 60% chance of playing win-sound2.mp3, win-sound3.mp3, or win-sound4.mp3
+    }
+    const audio = new Audio(`win-sound${audioIndex}.mp3`);
+    audio.loop = true;
+    audio.play();
+}
+
     }
 
     function preloadResources() {
