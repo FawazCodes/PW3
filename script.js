@@ -71,8 +71,8 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function changeBackground() {
-        const backgroundIndex = Math.floor(Math.random() * 2) + 1;
-        document.body.style.backgroundImage = `url('background${backgroundIndex}.gif')`;
+        const backgroundIndex = Math.floor(Math.random() * preloadedImages.length);
+        document.body.style.backgroundImage = `url('${preloadedImages[backgroundIndex].src}')`;
     }
 
     function playRandomWinSound() {
@@ -91,9 +91,14 @@ document.addEventListener('DOMContentLoaded', function () {
             'win-sound4.mp3',
         ];
 
-        imageUrls.forEach((imageUrl) => {
+        window.preloadedImages = [];
+
+                imageUrls.forEach((imageUrl) => {
             const img = new Image();
             img.src = imageUrl;
+            img.onload = () => {
+                preloadedImages.push(img);
+            };
         });
 
         audioUrls.forEach((audioUrl) => {
@@ -101,5 +106,11 @@ document.addEventListener('DOMContentLoaded', function () {
             audio.src = audioUrl;
             audio.load();
         });
+
+        // Update the changeBackground function to use preloadedImages
+        window.changeBackground = function() {
+            const backgroundIndex = Math.floor(Math.random() * preloadedImages.length);
+            document.body.style.backgroundImage = `url('${preloadedImages[backgroundIndex].src}')`;
+        };
     }
 });
