@@ -8,14 +8,14 @@ document.addEventListener("DOMContentLoaded", function() {
   const scissorsButton = document.getElementById("scissors");
   const resultDisplay = document.getElementById("result");
 
-  const background = new Image();
-  background.onload = function() {
-    document.body.style.backgroundImage = `url('${background.src}')`;
+  const dvd = new Image();
+  dvd.onload = function() {
+    document.body.style.backgroundImage = `url('${dvd.src}')`;
   };
-  background.onerror = function() {
-    console.error(`Error loading ${background.src}`);
+  dvd.onerror = function() {
+    console.error(`Error loading ${dvd.src}`);
   };
-  background.src = 'background.gif';
+  dvd.src = 'dvd.gif';
 
   function playGame(userChoice) {
     const computerChoice = (function() {
@@ -47,6 +47,17 @@ document.addEventListener("DOMContentLoaded", function() {
         winAudio.preload = "auto";
         winAudio.src = `win-sound${Math.floor(Math.random() * 4) + 1}.mp3`;
         winAudio.play();
+
+        const randomBackgroundIndex = Math.floor(Math.random() * 2) + 1;
+        const backgroundImage = new Image();
+        backgroundImage.onload = function() {
+          document.body.style.backgroundImage = `url('${backgroundImage.src}')`;
+        };
+        backgroundImage.onerror = function() {
+          console.error(`Error loading ${backgroundImage.src}`);
+        };
+        backgroundImage.src = `background${randomBackgroundIndex}.gif`;
+
       } else if (result === "tie") {
         message = "It's a Tie";
         emoji = "😐";
