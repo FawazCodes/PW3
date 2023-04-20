@@ -85,15 +85,13 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     const audio = new Audio(`win-sound${audioIndex}.mp3`);
     audio.loop = true;
-    audio.addEventListener('loadedmetadata', () => {
-        audio.play();
-    });
+    audio.play();
 }
 
 function preloadResources() {
     const imageUrls = ['background.gif', 'background2.gif'];
     const audioUrls = [
-        'win-sound1.mp3',
+        'win-sound.mp3',
         'win-sound2.mp3',
         'win-sound3.mp3',
         'win-sound4.mp3',
@@ -116,7 +114,7 @@ function preloadResources() {
     });
 
     // Update the changeBackground function to use preloadedImages
-    window.changeBackground = function () {
+    window.changeBackground = function() {
         const backgroundIndex = Math.floor(Math.random() * preloadedImages.length);
         document.body.style.backgroundImage = `url('${preloadedImages[backgroundIndex].src}')`;
     };
