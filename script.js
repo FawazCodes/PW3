@@ -8,6 +8,15 @@ document.addEventListener("DOMContentLoaded", function() {
   const scissorsButton = document.getElementById("scissors");
   const resultDisplay = document.getElementById("result");
 
+  const background = new Image();
+  background.onload = function() {
+    document.body.style.backgroundImage = `url('${background.src}')`;
+  };
+  background.onerror = function() {
+    console.error(`Error loading ${background.src}`);
+  };
+  background.src = 'background.gif';
+
   function playGame(userChoice) {
     const computerChoice = (function() {
       const choices = ["rock", "paper", "scissors"];
@@ -34,8 +43,6 @@ document.addEventListener("DOMContentLoaded", function() {
         message = "You Won!!!";
         emoji = "🥳";
         color = "green";
-        const randomBackgroundIndex = Math.floor(Math.random() * 2) + 1;
-        document.body.style.backgroundImage = `url('background${randomBackgroundIndex}.gif')`;
         const winAudio = new Audio();
         winAudio.preload = "auto";
         winAudio.src = `win-sound${Math.floor(Math.random() * 4) + 1}.mp3`;
