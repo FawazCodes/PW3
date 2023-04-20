@@ -1,6 +1,4 @@
 document.addEventListener('DOMContentLoaded', function () {
-    preloadResources();
-
     document.getElementById('curiousCat').onclick = function () {
         window.location.href = 'https://curiouscat.live/Idkwallah';
     };
@@ -71,54 +69,13 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function changeBackground() {
-        const backgroundIndex = Math.floor(Math.random() * preloadedImages.length);
-        document.body.style.backgroundImage = `url('${preloadedImages[backgroundIndex].src}')`;
+        const backgroundIndex = Math.floor(Math.random() * 2) + 1;
+        document.body.style.backgroundImage = `url('background${backgroundIndex}.gif')`;
     }
 
-   function playRandomWinSound() {
-    let audioIndex;
-    const randNum = Math.random();
-    if (randNum < 0.4) {
-        audioIndex = 1; // 40% chance of playing win-sound1.mp3
-    } else {
-        audioIndex = Math.floor(Math.random() * 3) + 2; // 60% chance of playing win-sound2.mp3, win-sound3.mp3, or win-sound4.mp3
+    function playRandomWinSound() {
+        const audioIndex = Math.floor(Math.random() * 4) + 1;
+        const audio = new Audio(`win-sound${audioIndex}.mp3`);
+        audio.play();
     }
-    const audio = new Audio(`win-sound${audioIndex}.mp3`);
-    audio.loop = true;
-    audio.play();
-}
-
-function preloadResources() {
-    const imageUrls = ['background.gif', 'background2.gif'];
-    const audioUrls = [
-        'win-sound.mp3',
-        'win-sound2.mp3',
-        'win-sound3.mp3',
-        'win-sound4.mp3',
-    ];
-
-    window.preloadedImages = [];
-
-    imageUrls.forEach((imageUrl) => {
-        const img = new Image();
-        img.src = imageUrl;
-        img.onload = () => {
-            preloadedImages.push(img);
-        };
-    });
-
-    audioUrls.forEach((audioUrl) => {
-        const audio = new Audio();
-        audio.src = audioUrl;
-        audio.load();
-        audio.oncanplaythrough = () => {
-            audio.play();
-        };
-    });
-
-    // Update the changeBackground function to use preloadedImages
-    window.changeBackground = function() {
-        const backgroundIndex = Math.floor(Math.random() * preloadedImages.length);
-        document.body.style.backgroundImage = `url('${preloadedImages[backgroundIndex].src}')`;
-    }
-}
+});
