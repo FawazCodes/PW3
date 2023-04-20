@@ -17,6 +17,14 @@ document.addEventListener("DOMContentLoaded", function() {
   };
   dvd.src = 'dvd.gif';
 
+  const backgroundImage = new Image();
+  backgroundImage.onload = function() {
+    document.body.style.backgroundImage = `url('${backgroundImage.src}')`;
+  };
+  backgroundImage.onerror = function() {
+    console.error(`Error loading ${backgroundImage.src}`);
+  };
+
   function playGame(userChoice) {
     const computerChoice = (function() {
       const choices = ["rock", "paper", "scissors"];
@@ -36,41 +44,32 @@ document.addEventListener("DOMContentLoaded", function() {
       return "lose";
     })(userChoice, computerChoice);
 
-    (function(result, computerChoice) {
-      let message, emoji, color;
+    if (result === "win") {
+      let randomBackgroundIndex = Math.floor(Math.random() * 2) + 1;
+      backgroundImage.src = `background${randomBackgroundIndex}.gif`;
+      const winAudio = new Audio();
+      winAudio.preload = "auto";
+      winAudio.src = `win-sound${Math.floor(Math.random() * 4) + 1}.mp3`;
+      winAudio.play();
+    }
 
-      if (result === "win") {
-        message = "You Won!!!";
-        emoji = "🥳";
-        color = "green";
-        const winAudio = new Audio();
-        winAudio.preload = "auto";
-        winAudio.src = `win-sound${Math.floor(Math.random() * 4) + 1}.mp3`;
-        winAudio.play();
+    let message, emoji, color;
+    if (result === "tie") {
+      message = "It's a Tie";
+      emoji = "😐";
+      color = "white";
+    } else if (result === "win") {
+      message = "You Won!!!";
+      emoji = "🥳";
+      color = "green";
+    } else {
+      message = "You Lost...";
+      emoji = "😢";
+      color = "red";
+    }
 
-        const randomBackgroundIndex = Math.floor(Math.random() * 2) + 1;
-        const backgroundImage = new Image();
-        backgroundImage.onload = function() {
-          document.body.style.backgroundImage = `url('${backgroundImage.src}')`;
-        };
-        backgroundImage.onerror = function() {
-          console.error(`Error loading ${backgroundImage.src}`);
-        };
-        backgroundImage.src = `background${randomBackgroundIndex}.gif`;
-
-      } else if (result === "tie") {
-        message = "It's a Tie";
-        emoji = "😐";
-        color = "white";
-      } else {
-        message = "You Lost...";
-        emoji = "😢";
-        color = "red";
-      }
-
-      resultDisplay.innerHTML = `${message} ${emoji}<br>Computer chose ${computerChoice} ${computerChoice === "rock" ? "🪨" : computerChoice === "paper" ? "📄" : "✂️"}`;
-      resultDisplay.style.color = color;
-    })(result, computerChoice);
+    resultDisplay.innerHTML = `${message} ${emoji}<br>Computer chose ${computerChoice} ${computerChoice === "rock" ? "🪨" : computerChoice === "paper" ? "📄" : "✂️"}`;
+    resultDisplay.style.color = color;
   }
 
   rockButton.addEventListener("click", function() {
@@ -78,8 +77,9 @@ document.addEventListener("DOMContentLoaded", function() {
   });
   paperButton.addEventListener("click", function() {
     playGame("paper");
-  });
-  scissorsButton.addEventListener("click", function() {
-    playGame("scissors");
-  });
+ 
+});
+scissorsButton.addEventListener("click", function() {
+playGame("scissors");
+});
 });
