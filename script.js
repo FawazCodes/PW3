@@ -1,106 +1,90 @@
-// Get DOM elements
-const result = document.getElementById("result");
-const gameButtons = document.querySelectorAll(".game-btn");
-const redirectBtn = document.getElementById("redirectBtn");
-const winAudio = document.getElementById("winAudio");
-const body = document.querySelector("body"); // Added this to access the body element
+<script>
+    document.getElementById('curiousCat').onclick = function () {
+        window.location.href = 'https://curiouscat.live/Idkwallah';
+    };
 
-// Add event listeners
-redirectBtn.addEventListener("click", () => {
-    window.location.href = "https://curiouscat.live/Idkwallah";
-});
+    const rockBtn = document.getElementById('rock');
+    const paperBtn = document.getElementById('paper');
+    const scissorsBtn = document.getElementById('scissors');
+    const resultDiv = document.getElementById('result');
 
-gameButtons.forEach((button) => {
-    button.addEventListener("click", () => {
-        const userChoice = button.getAttribute("data-choice");
-        const computerChoice = getRandomChoice();
-        const outcome = determineWinner(userChoice, computerChoice);
-        // Added emojis to the text
-        result.textContent = `You chose ${userChoice} ${getEmoji(userChoice)}, computer chose ${computerChoice} ${getEmoji(computerChoice)}. ${outcome}`;
-        // Added a function to change the text color based on the outcome
-        changeTextColor(outcome);
-    });
-});
+    rockBtn.addEventListener('click', () => playGame('rock'));
+    paperBtn.addEventListener('click', () => playGame('paper'));
+    scissorsBtn.addEventListener('click', () => playGame('scissors'));
 
-// Define functions
-function getRandomChoice() {
-    const choices = ["rock", "paper", "scissors"];
-    const randomIndex = Math.floor(Math.random() * choices.length);
-    const randomChoice = choices[randomIndex];
-    console.log(`Computer choice: ${randomChoice}`);
-    return randomChoice;
-}
+    function playGame(playerChoice) {
+        const computerChoice = Math.floor(Math.random() * 3);
+        let computerMove;
 
-function playWinAudio() {
-    // Added an array of audio sources
-    const audioSources = ["win-sound.mp3", "win-sound2.mp3", "win-sound3.mp3", "win-sound4.mp3"];
-    // Randomly select one of them
-    const randomSource = audioSources[Math.floor(Math.random() * audioSources.length)];
-    // Set the winAudio source to the random one
-    winAudio.src = randomSource;
-    winAudio.currentTime = 0;
-    winAudio.play();
-}
-
-function determineWinner(userChoice, computerChoice) {
-    console.log(`User choice: ${userChoice}, Computer choice: ${computerChoice}`);
-    if (userChoice === computerChoice) {
-        // Added an emoji for tie
-        return "It's a tie! 😐";
+        if (computerChoice === 0) {
+            computerMove = 'rock';
+        } else if (computerChoice === 1) {
+            computerMove = 'paper';
+       
+        const gameResult = getGameResult(playerChoice, computerMove);
+        displayResult(gameResult, computerMove);
     }
 
-    if (
-        (userChoice === "rock" && computerChoice === "scissors") ||
-        (userChoice === "scissors" && computerChoice === "paper") ||
-        (userChoice === "paper" && computerChoice === "rock")
-    ) {
-        playWinAudio();
-        console.log("You win!");
-        // Added a function to change the background when the user wins
-        changeBackground();
-        // Added an emoji for win
-        return "You win! 😁";
+    function getGameResult(playerChoice, computerMove) {
+        if (playerChoice === computerMove) {
+            return 'tie';
+        }
+
+        if (
+            (playerChoice === 'rock' && computerMove === 'scissors') ||
+            (playerChoice === 'paper' && computerMove === 'rock') ||
+            (playerChoice === 'scissors' && computerMove === 'paper')
+        ) {
+            return 'win';
+        }
+
+        return 'lose';
     }
 
-    console.log("You lose!");
-    // Added an emoji for lose
-    return "You lose! 😢";
-}
+    function displayResult(gameResult, computerMove) {
+        let resultText;
+        let emoji;
 
-// Added a function to get the emoji for each choice
-function getEmoji(choice) {
-    switch (choice) {
-        case "rock":
-            return "👊";
-        case "paper":
-            return "✋";
-        case "scissors":
-            return "✌️";
-        default:
-            return "";
+        if (gameResult === 'win') {
+            resultText = 'You Won!!!';
+            emoji = '🥳';
+            changeBackground();
+            playRandomWinSound();
+        } else if (gameResult === 'tie') {
+            resultText = 'It\'s a Tie';
+            emoji = '😐';
+        } else {
+            resultText = 'You Lost...';
+            emoji = '😢';
+        }
+
+        resultDiv.innerHTML = `${resultText} ${emoji}<br>Computer chose ${computerMove} ${getEmoji(computerMove)}`;
     }
-}
 
-// Added a function to change the background when the user wins
-function changeBackground() {
-    // Added an array of background sources
-    const backgroundSources = ["background.gif", "background2.gif"];
-    // Randomly select one of them
-    const randomSource = backgroundSources[Math.floor(Math.random() * backgroundSources.length)];
-    // Set the body background to the random one
-    body.style.backgroundImage = `url(${randomSource})`;
-}
+    function changeBackground() {
+        const randomBackground = Math.floor(Math.random() * 2) + 1;
+        document.body.style.backgroundImage = `url('background${randomBackground}.gif')`;
+    }
 
-// Added a function to change the text color based on the outcome
-function changeTextColor(outcome) {
-  if (outcome.includes("win")) {
-      // Set the text color to green if the user wins
-      result.style.color = "green";
-  } else if (outcome.includes("lose")) {
-      // Set the text color to red if the user loses
-      result.style.color = "red";
-  } else {
-      // Set the text color to black if it's a tie
-      result.style.color = "black";
-  }
-}
+    function playRandomWinSound() {
+        const randomSound = Math.floor(Math.random() * 4) + 1;
+        const audio = new Audio(`win-sound${randomSound}.mp3`);
+        audio.loop = true;
+        audio.play();
+    }
+
+    function getEmoji(move) {
+        switch (move) {
+            case 'rock':
+                return '🪨';
+            case 'paper':
+                return '📄';
+            case 'scissors':
+                return '✂️';
+            default:
+                return '';
+        }
+    }
+</script>
+</body>
+</html>
