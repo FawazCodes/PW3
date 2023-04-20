@@ -1,4 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
+    preloadResources();
+
     document.getElementById('curiousCat').onclick = function () {
         window.location.href = 'https://curiouscat.live/Idkwallah';
     };
@@ -12,80 +14,26 @@ document.addEventListener('DOMContentLoaded', function () {
     paperBtn.addEventListener('click', () => playGame('paper'));
     scissorsBtn.addEventListener('click', () => playGame('scissors'));
 
-    function playGame(playerChoice) {
-        const computerChoice = Math.floor(Math.random() * 3);
-        let computerMove;
+    // Rest of the script.js code
 
-        if (computerChoice === 0) {
-            computerMove = 'rock';
-        } else if (computerChoice === 1) {
-            computerMove = 'paper';
-        } else {
-            computerMove = 'scissors';
-        }
+    function preloadResources() {
+        const imageUrls = ['background.gif', 'background2.gif'];
+        const audioUrls = [
+            'win-sound.mp3',
+            'win-sound2.mp3',
+            'win-sound3.mp3',
+            'win-sound4.mp3',
+        ];
 
-        const gameResult = getGameResult(playerChoice, computerMove);
-        displayResult(gameResult, computerMove);
-    }
+        imageUrls.forEach((imageUrl) => {
+            const img = new Image();
+            img.src = imageUrl;
+        });
 
-    function getGameResult(playerChoice, computerMove) {
-        if (playerChoice === computerMove) {
-            return 'tie';
-        }
-
-        if (
-            (playerChoice === 'rock' && computerMove === 'scissors') ||
-            (playerChoice === 'paper' && computerMove === 'rock') ||
-            (playerChoice === 'scissors' && computerMove === 'paper')
-        ) {
-            return 'win';
-        }
-
-        return 'lose';
-    }
-
-    function displayResult(gameResult, computerMove) {
-        let resultText;
-        let emoji;
-
-        if (gameResult === 'win') {
-            resultText = 'You Won!!!';
-            emoji = '🥳';
-            changeBackground();
-            playRandomWinSound();
-        } else if (gameResult === 'tie') {
-            resultText = 'It\'s a Tie';
-            emoji = '😐';
-        } else {
-            resultText = 'You Lost...';
-            emoji = '😢';
-        }
-
-        resultDiv.innerHTML = `${resultText} ${emoji}<br>Computer chose ${computerMove} ${getEmoji(computerMove)}`;
-    }
-
-    function changeBackground() {
-        const randomBackground = Math.floor(Math.random() * 2) + 1;
-        document.body.style.backgroundImage = `url('background${randomBackground}.gif')`;
-    }
-
-    function playRandomWinSound() {
-        const randomSound = Math.floor(Math.random() * 4) + 1;
-        const audio = new Audio(`win-sound${randomSound}.mp3`);
-        audio.loop = true;
-        audio.play();
-    }
-
-    function getEmoji(move) {
-        switch (move) {
-            case 'rock':
-                return '🪨';
-            case 'paper':
-                return '📄';
-            case 'scissors':
-                return '✂️';
-            default:
-                return '';
-        }
+        audioUrls.forEach((audioUrl) => {
+            const audio = new Audio();
+            audio.src = audioUrl;
+            audio.load();
+        });
     }
 });
