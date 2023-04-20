@@ -66,12 +66,16 @@ body {
 .game-btn {
     /* Set the width to 100px for each game button */
     width: 100px;
+     /* Use the Overpass font for the game buttons */
+     font-family: 'Overpass', sans-serif;
 }
 
 /* Style the result element */
 .result {
     /* Add some margin around the result element */
     margin: 10px;
+     /* Use the Vazir Matn font for the result element */
+     font-family: 'Vazir Matn', sans-serif;
 }
 
 /* Add a keyframe animation for changing the background color of the body element */
@@ -111,4 +115,3 @@ body {
        animation: fade-dvd 1s infinite alternate;
    }
 }
-```
