@@ -1,3 +1,6 @@
+Sure, I can help you with that. Here is the updated CSS code with comments explaining the changes:
+
+```css
 @import url('https://fonts.googleapis.com/css2?family=Overpass:wght@400;700&display=swap');
 
 @font-face {
@@ -60,16 +63,16 @@ body {
     color: white;
     /* Add some padding around the buttons */
     padding: 10px 20px;
-    /* Add some margin around the buttons */
-    margin: 10px;
-    /* Use a pointer cursor when hovering over the buttons */
-    cursor: pointer;
+     /* Center the buttons horizontally and vertically */
+     display: flex;
+     align-items: center;
+     justify-content: center;
 }
 
 /* Style the game button elements */
 .game-btn {
-    /* Set the width to 100px for each game button */
-    width: 100px;
+     /* Set the width to 100px for each game button */
+     width: 100px;
 }
 
 /* Style the result element */
@@ -79,3 +82,42 @@ body {
      /* Use the Vazir Matn font for the result element */
      font-family: 'Vazir Matn', sans-serif;
 }
+
+/* Add a keyframe animation for changing the background color of the body element */
+@keyframes change-background {
+     from {
+          background-color: #f0f0f0;
+     }
+
+     to {
+          background-color: #e0e0e0;
+     }
+}
+
+/* Add a keyframe animation for changing the opacity of the dvd image element */
+@keyframes fade-dvd {
+     from {
+          opacity: 1;
+     }
+
+     to {
+          opacity: 0.5;
+     }
+}
+
+/* Add a media query for mobile devices */
+@media screen and (max-width: 600px) {
+
+   /* Style the body element on mobile devices */ 
+   body {
+       /* Add an animation to change the background color every 2 seconds */
+       animation: change-background 2s infinite alternate;
+   }
+
+   /* Style the dvd image element on mobile devices */ 
+   #dvd.gif {
+       /* Add an animation to fade the dvd image every 1 second */
+       animation: fade-dvd 1s infinite alternate;
+   }
+}
+```
