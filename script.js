@@ -12,7 +12,7 @@ redirectBtn.addEventListener("click", () => {
 
 gameButtons.forEach((button) => {
     button.addEventListener("click", () => {
-        const userChoice = button.dataset.choice;
+        const userChoice = button.getAttribute("data-choice");
         const computerChoice = getRandomChoice();
         const outcome = determineWinner(userChoice, computerChoice);
         // Added emojis to the text
@@ -24,25 +24,11 @@ gameButtons.forEach((button) => {
 
 // Define functions
 function getRandomChoice() {
-  const choices = ["rock", "paper", "scissors"];
-  const randomNum = Math.random();
-  if (randomNum < 0.4) { // 40% chance of choosing a losing move
-    const losingMoves = {
-      "rock": "paper",
-      "paper": "scissors",
-      "scissors": "rock"
-    };
+    const choices = ["rock", "paper", "scissors"];
     const randomIndex = Math.floor(Math.random() * choices.length);
-    const randomLosingMove = losingMoves[choices[randomIndex]];
-    console.log(`Computer choice: ${randomLosingMove}`);
-    return randomLosingMove;
-  } else { // 60% chance of choosing a random move
-    const randomIndex = Math.floor(Math.random() * choices.length);
-    const randomMove = choices[randomIndex];
-    console.log(`Computer choice: ${randomMove}`);
-    return randomMove;
-  }
-}
+    const randomChoice = choices[randomIndex];
+    console.log(`Computer choice: ${randomChoice}`);
+    return randomChoice;
 }
 
 function playWinAudio() {
