@@ -1,80 +1,64 @@
-/* Import fonts */
-@import url('https://fonts.googleapis.com/css2?family=Overpass:wght@400;700&display=swap');
 @font-face {
-    font-family: 'Vazir Matn';
+    font-family: 'Vazirmatn-Regular';
     src: url('Vazirmatn-Regular.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
 }
 
-/* Set global styles */
-:root {
-    --primary-color: #007aff;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 body {
-    background-color: #f0f0f0;
     font-family: 'Overpass', sans-serif;
-    margin: 0;
-    padding: 0;
+    background-image: url('dvd.gif');
+    background-repeat: no-repeat;
+    background-size: cover;
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
 }
 
-/* Style the container */
 .container {
-    max-width: 600px;
-    padding: 20px;
-    background-color: rgba(255, 255, 255, 0.8);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: rgba(255, 255, 255, 0.1);
     border-radius: 20px;
-    text-align: center;
-}
-
-/* Make the container square-shaped on mobile */
-@media (max-width: 600px) {
-    .container {
-        border-radius: 0;
-    }
-}
-
-/* Style the Arabic text */
-.arabic {
-    font-family: 'Vazir Matn', sans-serif;
-    text-align: right;
-}
-
-/* Style the buttons */
-.button {
-    border-radius: 15px;
-    border: none;
-    background-color: var(--primary-color);
-    color: white;
-    padding: 10px 20px;
+    padding: 20px;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin: 10px auto;
-    cursor: pointer;
 }
 
-.game-btn {
-    width: 100px;
-}
-
-/* Style the game result */
-.result {
-    margin: 10px auto;
-    font-family: 'Vazir Matn', sans-serif;
+h1 {
+    font-size: 2rem;
     text-align: center;
-    font-size: 1.2rem;
+    margin-bottom: 20px;
 }
 
-/* Make the "Play a mini game of Rock, Paper, Scissors" text smaller on mobile */
-@media (max-width: 600px) {
-    h2 {
-        font-size: 1.2rem;
-    }
+.button {
+    font-size: 1rem;
+    padding: 10px 20px;
+    border-radius: 20px;
+    border: none;
+    background-color: #007aff;
+    color: #fff;
+    text-align: center;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.button:hover {
+    background-color: #005bd1;
+}
+
+.result {
+    font-size: 1.2rem;
+    margin-top: 10px;
+    text-align: center;
 }
