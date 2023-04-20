@@ -14,15 +14,13 @@
 body {
     background-color: #f0f0f0;
     font-family: 'Overpass', sans-serif;
+    margin: 0;
+    padding: 0;
 }
 
 .container {
-    margin: 0 auto;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     max-width: 600px;
+    margin: 0 auto;
     padding: 20px;
     background-color: white;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -40,49 +38,57 @@ body {
     background-color: var(--primary-color);
     color: white;
     padding: 10px 20px;
-     display: flex;
-     align-items: center;
-     justify-content: center;
-     margin: 10px auto; /* Added this to center the buttons horizontally */
-     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px auto;
+    cursor: pointer;
 }
 
 .game-btn {
-     width: 100px;
+    width: 100px;
 }
 
 .result {
-     margin: 10px auto; /* Added this to center the result element horizontally */
-     font-family: 'Vazir Matn', sans-serif;
+    margin: 10px auto;
+    font-family: 'Vazir Matn', sans-serif;
+    text-align: center;
 }
 
 @keyframes change-background {
-     from {
-          background-color: #f0f0f0;
-     }
+    from {
+        background-color: #f0f0f0;
+    }
 
-     to {
-          background-color: #e0e0e0;
-     }
+    to {
+        background-color: #e0e0e0;
+    }
 }
 
 @keyframes fade-dvd {
-     from {
-          opacity: 1;
-     }
+    from {
+        opacity: 1;
+    }
 
-     to {
-          opacity: 0.5;
-     }
+    to {
+        opacity: 0.5;
+    }
 }
 
 @media screen and (max-width: 600px) {
+    .container {
+        border-radius: 0;
+    }
 
-   body {
-       animation: change-background 2s infinite alternate;
-   }
+    .result {
+        font-size: 1.5rem;
+    }
 
-   #dvd.gif {
-       animation: fade-dvd 1s infinite alternate;
-   }
+    body {
+        animation: change-background 2s infinite alternate;
+    }
+
+    #dvd.gif {
+        animation: fade-dvd 1s infinite alternate;
+    }
 }
