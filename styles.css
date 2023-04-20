@@ -1,3 +1,6 @@
+html {
+    font-size: 16px;
+}
 @font-face {
     font-family: 'Vazirmatn-Regular';
     src: url('Vazirmatn-Regular.woff2') format('woff2');
@@ -82,5 +85,24 @@ h1 {
     }
     100% {
         transform: scale(1);
+    }
+@media (max-width: 768px) {
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    .button {
+        font-size: 0.8rem;
+        padding: 8px 16px;
+    }
+
+    .result {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 20px;
     }
 }
