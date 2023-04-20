@@ -17,9 +17,11 @@ html {
 
 body {
     font-family: 'Overpass', sans-serif;
-    background-image: url('dvd.gif');
+    background-image: url("dvd.gif");
+    background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    background-attachment: fixed;
     display: flex;
     justify-content: center;
     align-items: center;
