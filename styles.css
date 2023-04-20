@@ -1,5 +1,5 @@
+/* Import fonts */
 @import url('https://fonts.googleapis.com/css2?family=Overpass:wght@400;700&display=swap');
-
 @font-face {
     font-family: 'Vazir Matn';
     src: url('Vazirmatn-Regular.woff2') format('woff2');
@@ -7,6 +7,7 @@
     font-style: normal;
 }
 
+/* Set global styles */
 :root {
     --primary-color: #007aff;
 }
@@ -18,24 +19,30 @@ body {
     padding: 0;
 }
 
+/* Style the container */
 .container {
     max-width: 600px;
     margin: 0 auto;
     padding: 20px;
-    background-color: rgba(255, 255, 255, 0.8); /* Set background-color to transparent white */
+    background-color: white;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 20px;
-    display: flex; /* Add flex display to center the content */
-    flex-direction: column; /* Stack the content vertically */
-    justify-content: center; /* Center the content vertically */
-    align-items: center; /* Center the content horizontally */
 }
 
+/* Make the container square-shaped on mobile */
+@media (max-width: 600px) {
+    .container {
+        border-radius: 0;
+    }
+}
+
+/* Style the Arabic text */
 .arabic {
     font-family: 'Vazir Matn', sans-serif;
     text-align: right;
 }
 
+/* Style the buttons */
 .button {
     border-radius: 15px;
     border: none;
@@ -53,46 +60,17 @@ body {
     width: 100px;
 }
 
+/* Style the game result */
 .result {
     margin: 10px auto;
     font-family: 'Vazir Matn', sans-serif;
     text-align: center;
+    font-size: 1.2rem;
 }
 
-@keyframes change-background {
-    from {
-        background-color: #f0f0f0;
-    }
-
-    to {
-        background-color: #e0e0e0;
-    }
-}
-
-@keyframes fade-dvd {
-    from {
-        opacity: 1;
-    }
-
-    to {
-        opacity: 0.5;
-    }
-}
-
-@media screen and (max-width: 600px) {
-    .container {
-        border-radius: 0;
-    }
-
-    .result {
-        font-size: 1.5rem;
-    }
-
-    body {
-        animation: change-background 2s infinite alternate;
-    }
-
-    #dvd.gif {
-        animation: fade-dvd 1s infinite alternate;
+/* Make the "Play a mini game of Rock, Paper, Scissors" text smaller on mobile */
+@media (max-width: 600px) {
+    h2 {
+        font-size: 1.2rem;
     }
 }
