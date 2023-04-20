@@ -22,9 +22,13 @@ body {
     max-width: 600px;
     margin: 0 auto;
     padding: 20px;
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.8); /* Set background-color to transparent white */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 20px;
+    display: flex; /* Add flex display to center the content */
+    flex-direction: column; /* Stack the content vertically */
+    justify-content: center; /* Center the content vertically */
+    align-items: center; /* Center the content horizontally */
 }
 
 .arabic {
