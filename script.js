@@ -1,4 +1,3 @@
-
 // Get DOM elements
 const result = document.getElementById("result");
 const gameButtons = document.querySelectorAll(".game-btn");
@@ -33,7 +32,7 @@ function getRandomChoice() {
 }
 
 function playWinAudio() {
-    // Changed the audio sources to match your request
+    // Added an array of audio sources
     const audioSources = ["win-sound.mp3", "win-sound2.mp3", "win-sound3.mp3", "win-sound4.mp3"];
     // Randomly select one of them
     const randomSource = audioSources[Math.floor(Math.random() * audioSources.length)];
@@ -105,4 +104,3 @@ function changeTextColor(outcome) {
       result.style.color = "black";
   }
 }
-```
