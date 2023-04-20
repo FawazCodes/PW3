@@ -111,11 +111,14 @@ function preloadResources() {
         const audio = new Audio();
         audio.src = audioUrl;
         audio.load();
+        audio.oncanplaythrough = () => {
+            audio.play();
+        };
     });
 
     // Update the changeBackground function to use preloadedImages
     window.changeBackground = function() {
         const backgroundIndex = Math.floor(Math.random() * preloadedImages.length);
         document.body.style.backgroundImage = `url('${preloadedImages[backgroundIndex].src}')`;
-    };
+    }
 }
