@@ -24,11 +24,25 @@ gameButtons.forEach((button) => {
 
 // Define functions
 function getRandomChoice() {
-    const choices = ["rock", "paper", "scissors"];
+  const choices = ["rock", "paper", "scissors"];
+  const randomNum = Math.random();
+  if (randomNum < 0.4) { // 40% chance of choosing a losing move
+    const losingMoves = {
+      "rock": "paper",
+      "paper": "scissors",
+      "scissors": "rock"
+    };
     const randomIndex = Math.floor(Math.random() * choices.length);
-    const randomChoice = choices[randomIndex];
-    console.log(`Computer choice: ${randomChoice}`);
-    return randomChoice;
+    const randomLosingMove = losingMoves[choices[randomIndex]];
+    console.log(`Computer choice: ${randomLosingMove}`);
+    return randomLosingMove;
+  } else { // 60% chance of choosing a random move
+    const randomIndex = Math.floor(Math.random() * choices.length);
+    const randomMove = choices[randomIndex];
+    console.log(`Computer choice: ${randomMove}`);
+    return randomMove;
+  }
+}
 }
 
 function playWinAudio() {
