@@ -7,80 +7,55 @@
     font-style: normal;
 }
 
-/* Use a variable to store the primary color */
 :root {
     --primary-color: #007aff;
 }
 
-/* Style the body element */
 body {
-    /* Use a light gray background color */
     background-color: #f0f0f0;
-    /* Use the Overpass font for the English text */
     font-family: 'Overpass', sans-serif;
 }
 
-/* Style the container element */
 .container {
-    /* Center the element horizontally and vertically */
     margin: 0 auto;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    /* Set the maximum width to 600px */
     max-width: 600px;
-    /* Add some padding around the element */
     padding: 20px;
-    /* Use a white background color */
     background-color: white;
-    /* Add some box shadow for a 3D effect */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    /* Use a squircle shape for the element */
     border-radius: 20px;
 }
 
-/* Style the Arabic text elements */
 .arabic {
-    /* Use the Vazir Matn font for the Arabic text */
     font-family: 'Vazir Matn', sans-serif;
-    /* Align the text to the right */
     text-align: right;
 }
 
-/* Style the button elements */
 .button {
-    /* Use a squircle shape for the buttons */
     border-radius: 15px;
-    /* Remove the default border */
     border: none;
-    /* Use a solid primary color for the buttons */
     background-color: var(--primary-color);
-    /* Use a white color for the text */
     color: white;
-    /* Add some padding around the buttons */
     padding: 10px 20px;
-     /* Center the buttons horizontally and vertically */
      display: flex;
      align-items: center;
      justify-content: center;
+     margin: 10px auto; /* Added this to center the buttons horizontally */
+     cursor: pointer;
 }
 
-/* Style the game button elements */
 .game-btn {
-     /* Set the width to 100px for each game button */
      width: 100px;
 }
 
-/* Style the result element */
 .result {
-     /* Add some margin around the result element */
-     margin: 10px;
-     /* Use the Vazir Matn font for the result element */
+     margin: 10px auto; /* Added this to center the result element horizontally */
      font-family: 'Vazir Matn', sans-serif;
 }
 
-/* Add a keyframe animation for changing the background color of the body element */
 @keyframes change-background {
      from {
           background-color: #f0f0f0;
@@ -91,7 +66,6 @@ body {
      }
 }
 
-/* Add a keyframe animation for changing the opacity of the dvd image element */
 @keyframes fade-dvd {
      from {
           opacity: 1;
@@ -102,19 +76,13 @@ body {
      }
 }
 
-/* Add a media query for mobile devices */
 @media screen and (max-width: 600px) {
 
-   /* Style the body element on mobile devices */ 
    body {
-       /* Add an animation to change the background color every 2 seconds */
        animation: change-background 2s infinite alternate;
    }
 
-   /* Style the dvd image element on mobile devices */ 
    #dvd.gif {
-       /* Add an animation to fade the dvd image every 1 second */
        animation: fade-dvd 1s infinite alternate;
    }
 }
-```
